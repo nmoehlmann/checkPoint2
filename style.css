@@ -1,0 +1,58 @@
+:root {
+  --space-cadet: #322D57ff;
+  --ultra-violet: #4B4D7Fff;
+  --plum: #844D83ff;
+  --dark-purple: #2F1632ff;
+  --indigo-dye: #17517Eff;
+  --bgDark: #150115;
+}
+
+body {
+  background-color: var(--bgDark)
+}
+
+
+.header {
+  background: rgb(75, 77, 127);
+  background: linear-gradient(180deg, rgba(75, 77, 127, 1) 0%, rgba(21, 1, 21, 1) 100%);
+}
+
+.resources {
+  background: rgb(75, 77, 127);
+  background: linear-gradient(0deg, rgba(75, 77, 127, 1) 0%, rgba(21, 1, 21, 1) 100%);
+}
+
+.upgrades {
+  background-color: var(--ultra-violet)
+}
+
+
+
+
+.crystalImg {
+  max-width: 10rem;
+}
+
+/* https: //images.neopets.com/cp/items/data/000/000/064/64757_32dacf3db4/64757.png */
+
+/* SECTION MEDIA QUERIES */
+
+.background-img {
+  background-image: url(assets/crystal-cave.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 50dvh;
+  width: 100dvw;
+}
+
+@media (min-width: 900px) {
+  .background-img {
+    background-image: url(assets/crystal-cave.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50dvh;
+    width: 100dvw;
+  }
+}
