@@ -1,4 +1,7 @@
 let minerals = 0
+let totalResources = 0
+let perClick = 0
+let perAutoMine = 0
 
 let clickUpgrades = [{
   name: 'Laser Drill',
@@ -29,6 +32,21 @@ let automaticUpgrades = [{
 }
 ]
 
+function totalResourceCount() {
+  if (minerals > totalResources) {
+    totalResources = minerals
+    console.log('total resource count', totalResources)
+  } else if (minerals < totalResources) {
+    totalResources += perClick
+  }
+}
+
+function totalResourceAutoCount() {
+  if (minerals < totalResources) {
+    totalResources += perAutoMine
+  }
+}
+
 // SECTION DRAWING
 
 function drawEverything() {
@@ -38,6 +56,11 @@ function drawEverything() {
   drawMineralsPerClick()
   drawMineralsPerAuto()
   drawCosts()
+  drawTotalResources()
+}
+
+function drawTotalResources() {
+  document.getElementById('totalResources').innerText = totalResources
 }
 
 function drawCosts() {
@@ -60,6 +83,7 @@ function drawMineralsPerClick() {
   // @ts-ignore
   document.getElementById('clickCollect').innerText = mineralsPerClick
   console.log('minerals per click', mineralsPerClick)
+  perClick = mineralsPerClick
 }
 
 function drawMineralsPerAuto() {
@@ -69,6 +93,7 @@ function drawMineralsPerAuto() {
   // @ts-ignore
   document.getElementById('autoCollect').innerText = mineralsPerAuto
   console.log('minerals per auto', mineralsPerAuto)
+  perAutoMine = mineralsPerAuto
 }
 
 function drawMinerals() {
@@ -99,6 +124,7 @@ function minePlanet() {
     mineralsPerClick = mineralsPerClick + cUpgrade.quantity * cUpgrade.multiplier)
   minerals += mineralsPerClick
   console.log('mineralsPerClick', mineralsPerClick)
+  totalResourceCount()
   drawEverything()
 }
 
@@ -108,7 +134,9 @@ function autoMine() {
     minedPerAuto = minedPerAuto + aUpgrade.quantity * aUpgrade.multiplier)
   console.log('automining', minedPerAuto)
   minerals += minedPerAuto
-  drawMinerals()
+  totalResourceAutoCount()
+  drawEverything()
+  console.log('perAutoMine', perAutoMine)
 }
 
 // SECTION BUYING UPGRADES
@@ -157,4 +185,4 @@ function buyThoriumReactor() {
 
 
 
-// setInterval(autoMine, 3000)
+setInterval(autoMine, 3000)
