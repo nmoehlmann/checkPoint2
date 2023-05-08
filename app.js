@@ -151,9 +151,13 @@ function buyItem(itemName) {
   if (itemName === automaticUpgrades[0].name || itemName === automaticUpgrades[1].name) {
     let foundItemAuto = automaticUpgrades.find(aUpgrade => itemName == aUpgrade.name)
     console.log(foundItemAuto)
+    // @ts-ignore
     if (minerals >= foundItemAuto.price) {
+      // @ts-ignore
       minerals -= foundItemAuto.price;
+      // @ts-ignore
       foundItemAuto.quantity++;
+      // @ts-ignore
       foundItemAuto.price = foundItemAuto.price * 2;
       drawEverything()
       return
@@ -161,9 +165,13 @@ function buyItem(itemName) {
   } else {
     let foundItemClick = clickUpgrades.find(cUpgrade => itemName == cUpgrade.name)
     console.log(foundItemClick)
+    // @ts-ignore
     if (minerals >= foundItemClick.price) {
+      // @ts-ignore
       minerals -= foundItemClick.price;
+      // @ts-ignore
       foundItemClick.quantity++;
+      // @ts-ignore
       foundItemClick.price = foundItemClick.price * 2;
       drawEverything()
     }
@@ -172,28 +180,28 @@ function buyItem(itemName) {
 
 // SECTION loops
 
-function disableButton(){
-    if (clickUpgrades[0].price > minerals){
-      document.getElementById('laserDrillButton').disabled = true;
-    } else {
-      document.getElementById('laserDrillButton').disabled = false;
-    }
-    if (automaticUpgrades[0].price > minerals){
-      document.getElementById('mineralExtractorButton').disabled = true;
-    } else {
-      document.getElementById('mineralExtractorButton').disabled = false;
-    }
-    if (clickUpgrades[1].price > minerals){
-      document.getElementById('airblastDrillButton').disabled = true;
-    } else {
-      document.getElementById('airblastDrillButton').disabled = false;
-    }
-    if (automaticUpgrades[1].price > minerals){
-      document.getElementById('thoriumReactorButton').disabled = true;
-    } else {
-      document.getElementById('thoriumReactorButton').disabled = false;
-    }
+function disableButton() {
+  if (clickUpgrades[0].price > minerals) {
+    document.getElementById('laserDrillButton').disabled = true;
+  } else {
+    document.getElementById('laserDrillButton').disabled = false;
   }
+  if (automaticUpgrades[0].price > minerals) {
+    document.getElementById('mineralExtractorButton').disabled = true;
+  } else {
+    document.getElementById('mineralExtractorButton').disabled = false;
+  }
+  if (clickUpgrades[1].price > minerals) {
+    document.getElementById('airblastDrillButton').disabled = true;
+  } else {
+    document.getElementById('airblastDrillButton').disabled = false;
+  }
+  if (automaticUpgrades[1].price > minerals) {
+    document.getElementById('thoriumReactorButton').disabled = true;
+  } else {
+    document.getElementById('thoriumReactorButton').disabled = false;
+  }
+}
 
 // SECTION LOCKED UPGRADES
 
