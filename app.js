@@ -57,6 +57,7 @@ function drawEverything() {
   drawMineralsPerAuto()
   drawCosts()
   drawTotalResources()
+  disableButton()
 }
 
 function drawTotalResources() {
@@ -141,48 +142,62 @@ function autoMine() {
 
 // SECTION BUYING UPGRADES
 
-function buyLaserDrill() {
-  if (minerals >= clickUpgrades[0].price) {
-    minerals -= clickUpgrades[0].price;
-    clickUpgrades[0].quantity++;
-    console.log('buying laser drill')
-    clickUpgrades[0].price = clickUpgrades[0].price * 2
-    console.log('laser drill cost', clickUpgrades[0].price)
-    drawEverything()
+
+/**
+ * 
+ * @param {string} itemName 
+ */
+function buyItem(itemName) {
+  if (itemName === automaticUpgrades[0].name || itemName === automaticUpgrades[1].name) {
+    let foundItemAuto = automaticUpgrades.find(aUpgrade => itemName == aUpgrade.name)
+    console.log(foundItemAuto)
+    if (minerals >= foundItemAuto.price) {
+      minerals -= foundItemAuto.price;
+      foundItemAuto.quantity++;
+      foundItemAuto.price = foundItemAuto.price * 2;
+      drawEverything()
+      return
+    }
+  } else {
+    let foundItemClick = clickUpgrades.find(cUpgrade => itemName == cUpgrade.name)
+    console.log(foundItemClick)
+    if (minerals >= foundItemClick.price) {
+      minerals -= foundItemClick.price;
+      foundItemClick.quantity++;
+      foundItemClick.price = foundItemClick.price * 2;
+      drawEverything()
+    }
   }
 }
 
-function buyAirblastDrill() {
-  if (minerals >= clickUpgrades[1].price) {
-    minerals -= clickUpgrades[1].price;
-    clickUpgrades[1].quantity++;
-    console.log('buying airblast drill')
-    clickUpgrades[1].price = clickUpgrades[1].price * 2
-    drawEverything()
+// SECTION loops
+
+function disableButton(){
+    if (clickUpgrades[0].price > minerals){
+      document.getElementById('laserDrillButton').disabled = true;
+    } else {
+      document.getElementById('laserDrillButton').disabled = false;
+    }
+    if (automaticUpgrades[0].price > minerals){
+      document.getElementById('mineralExtractorButton').disabled = true;
+    } else {
+      document.getElementById('mineralExtractorButton').disabled = false;
+    }
+    if (clickUpgrades[1].price > minerals){
+      document.getElementById('airblastDrillButton').disabled = true;
+    } else {
+      document.getElementById('airblastDrillButton').disabled = false;
+    }
+    if (automaticUpgrades[1].price > minerals){
+      document.getElementById('thoriumReactorButton').disabled = true;
+    } else {
+      document.getElementById('thoriumReactorButton').disabled = false;
+    }
   }
-}
 
-
-function buyMineralExtractor() {
-  if (minerals >= automaticUpgrades[0].price) {
-    minerals -= automaticUpgrades[0].price;
-    automaticUpgrades[0].quantity++;
-    console.log('buying mineral extractor')
-    automaticUpgrades[0].price = automaticUpgrades[0].price * 2
-    drawEverything()
-  }
-}
-
-function buyThoriumReactor() {
-  if (minerals >= automaticUpgrades[1].price) {
-    minerals -= automaticUpgrades[1].price;
-    automaticUpgrades[1].quantity++;
-    console.log('buying thorium reactor')
-    automaticUpgrades[1].price = automaticUpgrades[1].price * 2
-    drawEverything()
-  }
-}
+// SECTION LOCKED UPGRADES
 
 
 
+disableButton()
 setInterval(autoMine, 3000)

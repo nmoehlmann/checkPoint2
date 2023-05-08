@@ -33,10 +33,10 @@
 
 <body class="">
 
-  <header class="container-fluid text-center header">
+  <header class="container-fluid header">
     <section class="row">
       <div class="col">
-        <div class="p-3">
+        <div class="p-3 d-flex justify-content-center">
           <h1 class="fw-bold text-light">Hollow Miners</h1>
         </div>
       </div>
@@ -44,9 +44,12 @@
   </header>
 
   <main class="container-fluid">
-    <section class="row">
-      <div class="col-12 background-img d-flex align-items-end justify-content-center">
-        <div class="">
+    <section class="row background-img">
+      <div class="col-12 d-flex justify-content-center text-light">
+        <h1>Total <a class="minerals">Minerals</a> Collected: <a class="minerals"><span id="totalResources">0</span></a></h1>
+      </div>
+      <div class="col-12 d-flex align-items-between justify-content-center">
+        <div class="d-flex flex-column justify-content-end text-light">
           <img class="crystalImg" onclick="minePlanet()"
             src="https://static.vecteezy.com/system/resources/previews/019/017/602/original/an-8-bit-retro-styled-pixel-art-illustration-of-a-shiny-crystal-free-png.png"
             alt="">
@@ -56,56 +59,66 @@
 
 
 
-    <section class="row resources">
+    <section class="row resources text-center text-light">
       <div class="col-12">
-        <h1>Resources</h1>
-        <div>
-          <p>Minerals:<span id="mineralCount">0</span></p>
-          <p>Minerals Per Click:<span id="clickCollect">1</span></p>
-          <p>Automatic Mining:<span id="autoCollect">0</span></p>
+        <h1 class="">Resources</h1>
+        <div class="d-flex justify-content-evenly p-4 fw-bold fs-5 resourceList">
+          <p class="m-0">Minerals Per Click: <a class="minerals"><span id="clickCollect">1</span></a> <i class="mdi mdi-cursor-default-click-outline"></i></p>
+          <p class="m-0 fs-2">Minerals: <a class="minerals"><span id="mineralCount">0</span></a> <i class="mdi mdi-diamond-stone"></i></p>
+          <p class="m-0">Automatic Mining: <a class="minerals"><span id="autoCollect">0</span></a> <i class="mdi mdi-auto-mode"></i></p>
         </div>
       </div>
     </section>
 
 
 
-    <section class="row upgrades">
-      <div class="col-12 col-md-6">
-        <h1>Click Upgrades</h1>
-        <div>
-          <p>Laser Drill:<span id="laserDrillQty">1</span></p>
-          <p>Cost:<span id="laserDrillCost">5</span></p>
-          <button onclick="buyLaserDrill()">Buy</button>
+    <section class="row upgrades py-4">
+<!-- NOTE CLICK UPGRADES -->
+      <div class="col-12 col-md-6 text-white upgradesCard">
+        <h1 class="text-center">Click Upgrades</h1>
+        <div class="d-flex flex-column align-items-center fs-4 card my-4 py-3">
+          <p class="fw-bold">Laser Drill: <a class="minerals"><span id="laserDrillQty">1</span></a></p>
+          <div class="d-flex justify-content-center gap-4 py-3">
+            <p class="m-0">Cost: <a class="minerals"><span id="laserDrillCost">5</span></a> <i class="mdi mdi-diamond"></i></p>
+            <button id="laserDrillButton" class="btn btn-dark button" onclick="buyItem('Laser Drill')">Buy</button>
+          </div>
+          <img src="assets/Laser_Drill.webp" alt="">
         </div>
-        <div>
-          <p>Airblast Drill:<span id="airblastDrillQty">0</span></p>
-          <p>Cost:<span id="airblastDrillCost">10</span></p>
-          <button onclick="buyAirblastDrill()">Buy</button>
+        <div class="d-flex flex-column align-items-center fs-4 card py-3">
+          <p class="fw-bold">Airblast Drill: <a class="minerals"><span id="airblastDrillQty">0</span></a></p>
+          <div class="d-flex justify-content-center gap-4 py-3">
+            <p class="m-0">Cost: <a class="minerals"><span id="airblastDrillCost">10</span></a> <i class="mdi mdi-diamond"></i></p>
+            <button id="airblastDrillButton" class="btn btn-dark" onclick="buyItem('Airblast Drill')">Buy</button>
+          </div>
+          <img src="assets/Airblast_Drill.webp" alt="">
         </div>
       </div>
-      <div class="col-12 col-md-6">
-        <h1>Automatic Upgrades</h1>
-        <div>
-          <p>Mineral Extractor:<span id="mineralExtractorQty">0</span></p>
-          <p>Cost:<span id="mineralExtractorCost">50</span></p>
-          <button onclick="buyMineralExtractor()">Buy</button>
+<!-- NOTE AUTO UPGRADES -->
+      <div class="col-12 col-md-6 text-white upgradesCard">
+        <h1 class="text-center">Automatic Upgrades</h1>
+        <div class="lockedCard">
+          <div class="d-flex flex-column align-items-center fs-4 card my-4 py-3">
+            <p class="fw-bold">Mineral Extractor: <a class="minerals"><span id="mineralExtractorQty">0</span></a></p>
+            <div class="d-flex justify-content-center gap-4 py-3">
+              <p class="m-0">Cost: <a class="minerals"><span id="mineralExtractorCost">50</span></a> <i class="mdi mdi-diamond"></i></p></p>
+              <button id="mineralExtractorButton" class="btn btn-dark" onclick="buyItem('Mineral Extractor')">Buy</button>
+            </div>
+            <img src="assets/block-atmospheric-concentrator-ui.png" alt="">
+          </div>
         </div>
-        <div>
-          <p>Thorium Reactor:<span id="thoriumReactorQty">0</span></p>
-          <p>Cost:<span id="thoriumReactorCost">200</span></p>
-          <button onclick="buyThoriumReactor()">Buy</button>
+        <div class="d-flex flex-column align-items-center fs-4 card py-3">
+          <p class="fw-bold">Thorium Reactor: <a class="minerals"><span id="thoriumReactorQty">0</span></a></p>
+          <div class="d-flex justify-content-center gap-4 py-3">
+            <p class="m-0">Cost: <a class="minerals"><span id="thoriumReactorCost">200</span></a> <i class="mdi mdi-diamond"></i></p></p>
+            <button id="thoriumReactorButton" class="btn btn-dark" onclick="buyItem('Thorium Reactor')">Buy</button>
+          </div>
+          <img src="assets/block-impact-reactor-ui.png" alt="">
         </div>
       </div>
     </section>
   </main>
 
-  <footer class=" container-fluid">
-    <section class="row bg-secondary">
-      <div class="col-12">
-        footer
-      </div>
-    </section>
-  </footer>
+
 
 
 
